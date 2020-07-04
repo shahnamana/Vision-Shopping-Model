@@ -43,11 +43,14 @@ def webscrapfn(query_add):
             price_lst.append(j.text)
         for a in container.find_all('a'):
             name_prod.append(a.text)
+        for a in container.findAll('img'):
+            img_url.append(a.get('src'))
 
     '''
     The next line removes the blank entries got from a tag of images as they don't have any text
     '''
-    if  my_url.find('Shoes') or my_url.find('Footwear') or my_url.find('Shoe'):
+
+    if my_url.find('Shoes') or my_url.find('Footwear') or my_url.find('Shoe'):
         name_prod = name_prod[1::2]
     else:
         name_prod = name_prod[0::2]
@@ -58,7 +61,7 @@ def webscrapfn(query_add):
 
     for i in range(5):
         prodlist['name_prod'] = name_prod[i]
-        # prodlist['img_url'] = img_url[i]
+        prodlist['img_url'] = img_url[i]
         prodlist['price_lst'] = price_lst[i]
         main_list_all_items.append(prodlist)
         prodlist = dict()
@@ -101,7 +104,7 @@ def google_vision_api(img_path):
     for label in labels:
         print(label.description)
         l.append(label.description)
-
+    temp_lab = l
     l = ['t+shirt' if x=='Tshirt' else x for x in l]
     l = [l[i].replace(' ' ,'+') for i in range(len(l))]
     # for label in labels:
@@ -113,6 +116,8 @@ def google_vision_api(img_path):
     query = "+".join(l[:6])
 
     return query
+
+
 
 
 
