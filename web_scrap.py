@@ -63,11 +63,8 @@ name_prod = []
 
 for container in containers[:20]:
     price = container.findAll('span', {'class' : 'HRLxBb'})
-    prod_list = container.findAll('div', {'class':'rgHvZc'})
-    # print(price[0].text)
     price_lst.append(price[0].text)
     for a in container.find_all('a'):
-        # print(a.get('href')) #for getting link
         name_prod.append(a.text)
     for a in container.findAll('img'):
         img_url.append(a.get('src'))
