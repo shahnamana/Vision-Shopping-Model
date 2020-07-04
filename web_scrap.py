@@ -27,11 +27,21 @@ short url:
 https://www.google.com/search?tbm=shop&q=blue+t+shirt
 
 '''
+'''
+div with class "MUQY0" is imp it has the img tag
 
+div with class "sh-dgr__thumbnail" is for getting the source link of the seller
+
+span with class "Nr22bf" has the price info
+
+
+
+
+'''
 
 
 r = requests.get("https://www.google.com/search?tbm=shop&q=blue+t+shirt")
 soup = BeautifulSoup(r.content)
 soup.find("div", {"class": "sh-dgr__thumbnail"})
-for i in soup.find("div", {"class": "sh-dgr__thumbnail"})[:16]):
+soup.find("div", {"class": "sh-dgr__content"})
     print(a[i])
