@@ -7,11 +7,21 @@
 </head>
 <body>
   {% block main %}
-    <ul>
-        {% for item in list1 %}
-          <li>{{ item }}</li>
+    <div>
+      {% for item in main_list_all_items %}
+     <!-- <img src="{{ item.img_url }}" height="250px" width="auto"></img> -->
+     <p>
+       <p>
+         {{ item.name_prod }}
+         <p>
+           <p>
+             {{ item.price_lst }}
+
+             <p>
+               <p>
+
         {% endfor %}
-    </ul>
+    </div>
     {% endblock %}
 </body>
 </html>
