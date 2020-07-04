@@ -9,7 +9,7 @@ from google.cloud.vision import types
 client = vision.ImageAnnotatorClient()
 
 # The name of the image file to annotate
-file_name = os.path.abspath('mushrshirt.png')
+file_name = os.path.abspath('test_images/22.jpg')
 
 # Loads the image into memory
 with io.open(file_name, 'rb') as image_file:
@@ -31,3 +31,6 @@ color = ['Pink', 'Red', 'Brown', 'Black', 'White', 'Yellow', 'Blue', 'Green', 'G
 for label in labels:
     print(label.description)
     l.append(label.description)
+
+print(labels)
+print(" ".join(l))
