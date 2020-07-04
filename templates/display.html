@@ -7,7 +7,11 @@
 </head>
 <body>
   {% block main %}
-    {% for item in r}
+    <ul>
+        {% for item in list1 %}
+          <li>{{ item }}</li>
+        {% endfor %}
+    </ul>
     {% endblock %}
 </body>
 </html>
