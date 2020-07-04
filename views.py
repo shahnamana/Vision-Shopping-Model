@@ -33,13 +33,13 @@ def upload_file():
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             list1, list2, list3 = [1, 2, 3], [4, 5, 6], [7, 8, 9]
-            return render_template('display.html', data = list1)
+            return render_template('display.html', list1 = list1, list2 = list2)
     return render_template("index.html")
 
 #
 # @app.route('/display')
 # def display(list1):
-#     return render_template("display.html", list1=list1)
+#     return render_template("display.html", data=list1)
 
 
 if __name__ == '__main__':

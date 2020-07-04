@@ -37,6 +37,7 @@ from bs4 import BeautifulSoup as soup
 from urllib.request import urlopen as uReq
 from urllib.request import Request
 
+
 my_url = 'https://www.google.com/search?tbm=shop&q=blue+sweatshirt'
 hdr = {'User-Agent': 'Mozilla/5.0'}
 request = Request(my_url, headers=hdr)

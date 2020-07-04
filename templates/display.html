@@ -6,10 +6,8 @@
     <title>Similar items</title>
 </head>
 <body>
-    <ul>
-        {% for item in list1 %}
-          <li>{{ item }}</li>
-        {% endfor %}
-    </ul>
+  {% block main %}
+    {% for item in r}
+    {% endblock %}
 </body>
 </html>
