@@ -39,7 +39,7 @@ from urllib.request import Request
 
 
 # my_url = 'https://www.google.com/search?tbm=shop&q=blue+shirt'
-my_url = 'https://www.google.com/search?tbm=shop&q=Footwear+White+Shoe+Sneakers+Product+Athletic+shoe'
+my_url = 'https://www.google.com/search?tbm=shop&q=Footwear+Blue+Shoe+Sneakers+Product+Athletic+shoe'
 hdr = {'User-Agent': 'Mozilla/5.0'}
 request = Request(my_url, headers=hdr)
 uClient = uReq(request)
@@ -70,6 +70,8 @@ name_prod = []
 #     for a in container.findAll('img'):
 #         img_url.append(a.get('src'))
 
+avail_retail = []
+print(len(containers[:10]))
 for container in containers[:10]:
     # price = container.findAll('span', {'class' : 'HRLxBb'})
     for j in container.findAll('span', {'class':"HRLxBb"}):
@@ -79,7 +81,10 @@ for container in containers[:10]:
     for a in container.findAll('img'):
         img_url.append(a.get('src'))
 
+    for a in container.findAll('div', {'class': 'dD8iuc'}):
+        avail_retail.append(a.text)
 
+print(len(img_url))
 
 name_prod = name_prod[0::2]
 # for i in range(len(price_lst)):
@@ -90,16 +95,25 @@ name_prod = name_prod[0::2]
 
 prodlist = dict()
 main_list_all_items = []
-for i in range(5):
+# for i in range(5):
+#     prodlist['name_prod'] = name_prod[i]
+#     prodlist['img_url'] = img_url[i]
+#     prodlist['price_lst'] = price_lst[i]
+#     main_list_all_items.append(prodlist)
+#     prodlist = dict()
+
+print(len(img_url))
+for i in range(len(img_url)):
+    prodlist = dict()
     prodlist['name_prod'] = name_prod[i]
     prodlist['img_url'] = img_url[i]
     prodlist['price_lst'] = price_lst[i]
     main_list_all_items.append(prodlist)
-    prodlist = dict()
 
-
-for i in range(len(main_list_all_items)):
-    print(main_list_all_items[i]['img_url'])
+print(avail_retail)
+# for i in range(len(main_list_all_items)):
+#     print(main_list_all_items[i])
+#     print()
 '''
 The next line removes the blank entries got from a tag of images as they don't have any text
 '''
