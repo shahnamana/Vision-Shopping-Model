@@ -23,7 +23,7 @@ def webscrapfn(query_add):
     uClient = uReq(request)
     page_html = uClient.read()
     uClient.close()
-
+    print(my_url.lower())
     page_soup = soup(page_html,'html.parser')
 
     '''
@@ -49,11 +49,15 @@ def webscrapfn(query_add):
             img_url.append(a.get('src'))
         for a in container.findAll('div', {'class': 'dD8iuc'}):
             avail_retail.append(a.text)
-
+    aaa = my_url.lower()
     '''
     The next line removes the blank entries got from a tag of images as they don't have any text
     '''
-
+    # if my_url.lower().find('shoe') or my_url.lower().find('footwear') or my_url.lower().find('shoes'):
+    if 'shoe' in aaa or 'footwear' in aaa or 'shoes' in aaa:
+        name_prod = name_prod[0::2]
+    else:
+        name_prod = name_prod[1::2]
     prodlist = dict()
     main_list_all_items = []
 
