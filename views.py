@@ -38,7 +38,7 @@ def webscrapfn(query_add):
 
     name_prod = []
 
-    for container in containers[:5]:
+    for container in containers[:10]:
         for j in container.findAll('span', {'class':"HRLxBb"}):
             price_lst.append(j.text)
         for a in container.find_all('a'):
@@ -50,21 +50,28 @@ def webscrapfn(query_add):
     The next line removes the blank entries got from a tag of images as they don't have any text
     '''
 
-    if my_url.find('Shoes') or my_url.find('Footwear') or my_url.find('Shoe'):
-        name_prod = name_prod[1::2]
-    else:
-        name_prod = name_prod[0::2]
+    # if my_url.find('Shoes') or my_url.find('Footwear') or my_url.find('Shoe'):
+    #     name_prod = name_prod[1::2]
+    # else:
+    #     name_prod = name_prod[0::2]
 
     prodlist = dict()
     main_list_all_items = []
     # print(len(name_prod))
 
-    for i in range(5):
+    # for i in range(5):
+    # prodlist['name_prod'] = name_prod[0]
+    # prodlist['img_url'] = img_url[0]
+    # prodlist['price_lst'] = price_lst[0]
+    # main_list_all_items.append(prodlist)
+        # prodlist = dict()
+    print(len(img_url))
+    for i in range(9):
+        prodlist = dict()
         prodlist['name_prod'] = name_prod[i]
         prodlist['img_url'] = img_url[i]
         prodlist['price_lst'] = price_lst[i]
         main_list_all_items.append(prodlist)
-        prodlist = dict()
 
     return main_list_all_items
 
