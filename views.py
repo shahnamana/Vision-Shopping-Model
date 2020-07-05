@@ -50,21 +50,9 @@ def webscrapfn(query_add):
     The next line removes the blank entries got from a tag of images as they don't have any text
     '''
 
-    # if my_url.find('Shoes') or my_url.find('Footwear') or my_url.find('Shoe'):
-    #     name_prod = name_prod[1::2]
-    # else:
-    #     name_prod = name_prod[0::2]
-
     prodlist = dict()
     main_list_all_items = []
-    # print(len(name_prod))
 
-    # for i in range(5):
-    # prodlist['name_prod'] = name_prod[0]
-    # prodlist['img_url'] = img_url[0]
-    # prodlist['price_lst'] = price_lst[0]
-    # main_list_all_items.append(prodlist)
-        # prodlist = dict()
     print(len(img_url))
     for i in range(9):
         prodlist = dict()
@@ -114,18 +102,10 @@ def google_vision_api(img_path):
     temp_lab = l
     l = ['t+shirt' if x=='Tshirt' else x for x in l]
     l = [l[i].replace(' ' ,'+') for i in range(len(l))]
-    # for label in labels:
-    #     if label.lower() == "tshirt":
-    #         labels.remove(label)
-    #         label = "t+shirt"
-    #         labels.append(label)
 
     query = "+".join(l[:6])
 
     return query
-
-
-
 
 
 def allowed_file(filename):
@@ -141,8 +121,6 @@ def upload_file():
             flash('No file part')
             return redirect(request.url)
         file = request.files['file']
-        # if user does not select file, browser also
-        # submit an empty part without filename
         if file.filename == '':
             flash('No selected file')
             return redirect(request.url)
@@ -153,7 +131,6 @@ def upload_file():
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             q = google_vision_api(img_path)
             list1 = webscrapfn(q)
-            # list1, list2, list3 = [1, 2, 3], [4, 5, 6], [7, 8, 9]
             return render_template('display.html', main_list_all_items = list1)
     return render_template("index.html")
 
