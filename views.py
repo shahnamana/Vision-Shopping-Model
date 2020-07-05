@@ -54,6 +54,7 @@ def webscrapfn(query_add):
     The next line removes the blank entries got from a tag of images as they don't have any text
     '''
     # if my_url.lower().find('shoe') or my_url.lower().find('footwear') or my_url.lower().find('shoes'):
+    # name_prod = name_prod[0::2]
     if 'shoe' in aaa or 'footwear' in aaa or 'shoes' in aaa:
         name_prod = name_prod[0::2]
     else:
