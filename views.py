@@ -1,3 +1,6 @@
+from urllib.request import Request
+from urllib.request import urlopen as uReq
+from bs4 import BeautifulSoup as soup
 import os
 from flask import Flask, flash, request, redirect, url_for
 from flask import render_template
@@ -11,10 +14,6 @@ app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 
-from bs4 import BeautifulSoup as soup
-from urllib.request import urlopen as uReq
-from urllib.request import Request
-
 def webscrapfn(query_add):
     my_url = 'https://www.google.com/search?tbm=shop&q='+query_add
     print(my_url)
@@ -24,13 +23,13 @@ def webscrapfn(query_add):
     page_html = uClient.read()
     uClient.close()
     print(my_url.lower())
-    page_soup = soup(page_html,'html.parser')
+    page_soup = soup(page_html, 'html.parser')
 
     '''
     the following line provides proper output for img, pricelist, name_prod
 
     '''
-    containers = page_soup.findAll('div' , {'class' :'u30d4'})
+    containers = page_soup.findAll('div', {'class': 'u30d4'})
 
     price_lst = []
 
@@ -41,7 +40,7 @@ def webscrapfn(query_add):
     avail_retail = []
 
     for container in containers[:10]:
-        for j in container.findAll('span', {'class':"HRLxBb"}):
+        for j in container.findAll('span', {'class': "HRLxBb"}):
             price_lst.append(j.text)
         for a in container.find_all('a'):
             name_prod.append(a.text)
@@ -55,7 +54,7 @@ def webscrapfn(query_add):
     '''
     # if my_url.lower().find('shoe') or my_url.lower().find('footwear') or my_url.lower().find('shoes'):
     if 'shoe' in aaa or 'footwear' in aaa or 'shoes' in aaa:
-        name_prod = name_prod[0::2]
+        name_prod = name_prod[1::2]
     else:
         name_prod = name_prod[1::2]
     prodlist = dict()
@@ -70,7 +69,6 @@ def webscrapfn(query_add):
         main_list_all_items.append(prodlist)
 
     return main_list_all_items
-
 
 
 def google_vision_api(img_path):
@@ -101,15 +99,14 @@ def google_vision_api(img_path):
 
     print('Labels:')
 
-
     l = []
 
     for label in labels:
         print(label.description)
         l.append(label.description)
     temp_lab = l
-    l = ['t+shirt' if x=='Tshirt' else x for x in l]
-    l = [l[i].replace(' ' ,'+') for i in range(len(l))]
+    l = ['t+shirt' if x == 'Tshirt' else x for x in l]
+    l = [l[i].replace(' ', '+') for i in range(len(l))]
 
     query = "+".join(l[:6])
 
@@ -139,10 +136,8 @@ def upload_file():
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             q = google_vision_api(img_path)
             list1 = webscrapfn(q)
-            return render_template('display.html', main_list_all_items = list1)
+            return render_template('display.html', main_list_all_items=list1)
     return render_template("index.html")
-
-
 
 
 if __name__ == '__main__':
